@@ -1,0 +1,27 @@
+{% load static %}
+<header>
+  <nav class="navbar navbar-light" style="background: green">
+    <style>
+      .outer {
+        text-align: center;
+      }
+      .active a {
+        color: white;
+      }
+      .size {
+        font-size: 45px;
+      }
+      child {
+        line-height: 200px;
+      }
+    </style>
+    <div class="container">
+      <div class="outer active size">
+        <a class="navbar-brand" href="{% url 'Home:index' %}" style="text-decoration: none;"> 
+          <img src="{% static 'img.png' %}" width="70" height="70" class="d-inline-block align-top">
+          MegaSoc Parser
+        </a>
+      </div>       
+    </div>
+  </nav> 
+</header>
