@@ -4,13 +4,41 @@
   <head>    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'img.png' %}" type="image"> 
+    <style>
+      header {
+        background: green;
+        background-size: contain;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .footer {
+        text-align: center;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        width: 99%;
+        font-size: 19px;
+        font-weight: sans-serif;
+      }
+    </style>
     <title>
+      MegaParser
     </title>
   </head>
   <body>	   
     {% include "includes/header.html" %}
     <main>
-      <div class="container py-5">  
+      <div class="wrapper">
+        <div class="content">
+
+        </div>
+        <div class="footer">
+          {% include "includes/footer.html" %}
+        </div>
       </div>
     </main>
   </body>
