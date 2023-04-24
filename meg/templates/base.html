@@ -25,7 +25,8 @@
       }
     </style>
     <title>
-      MegaParser
+      {% block title %}
+      {% endblock %}
     </title>
   </head>
   <body>	   
@@ -33,8 +34,8 @@
     <main>
       <div>
         <div>
-          
-          
+          {% block content %}
+          {% endblock %}
         </div>
         <div class="footer">
           {% include "includes/footer.html" %}

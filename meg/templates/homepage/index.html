@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+  MegaParcer
+{% endblock %}
+{% block content %}
+  <h1>Выберите вид журнала для анализа</h1>
+  {% for log in logs %}
+    <hr>
+    <ul>
+      <li>
+        <a href="{% url 'App:system' log.id %}">{{ log.funk }}</a>
+      </li>
+    </ul>
+    <hr>
+  {% endfor %}
+{% endblock %}
