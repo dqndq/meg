@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+
+class ReadFile(models.Model):
+    file = models.FileField('Файл', help_text='Перетащите сюда файл', upload_to='documents/')

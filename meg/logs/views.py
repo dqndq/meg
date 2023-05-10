@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotFound
-from .forms import ReadFile
+from .forms import ReadFileForm
 
 
 logs = [
@@ -23,11 +23,17 @@ num = set(log['id'] for log in logs)
 
 def system(request, id):
     template = 'logs/system.html'
+
     if id not in num:
         return HttpResponseNotFound('Такой функции нет')
-    form = ReadFile(request.GET or None)
-    if form.is_valid():
-        pass
+
+    if request.method == 'POST':
+        form = ReadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ReadFileForm()
+    
     context = {
         'log': logs[id],
         'form': form

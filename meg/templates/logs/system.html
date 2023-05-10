@@ -7,15 +7,11 @@
       Parcer
     </div>
     <div class="card-body">
-    <form>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
       {% bootstrap_form form %}
       {% bootstrap_button button_type="submit" content="Прочитать" %}
     </form>
     </div>
   </div>
-  {% with data=request.GET %}
-    {% if form.is_valid %}
-      <h2>Успешно</h2>
-    {% endif %}
-  {% endwith %}
 {% endblock %}

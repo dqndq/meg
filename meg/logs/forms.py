@@ -1,5 +1,8 @@
 from django import forms
+from .models import ReadFile
 
 
-class ReadFile(forms.Form):
-    file = forms.CharField(label='Файл', help_text='Перетащите сюда файл', widget=forms.Textarea)
+class ReadFileForm(forms.ModelForm):
+    class Meta:
+        model = ReadFile
+        fields = '__all__'
