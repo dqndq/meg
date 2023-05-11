@@ -13,5 +13,8 @@
       {% bootstrap_button button_type="submit" content="Прочитать" %}
     </form>
     </div>
+    <div>
+      <p>Ваш файл: <a href="media/{{ form.instance.file }}">{{ form.instance.file }}</a></p>
+    </div>
   </div>
 {% endblock %}

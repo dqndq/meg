@@ -28,12 +28,15 @@ def system(request, id):
         return HttpResponseNotFound('Такой функции нет')
 
     if request.method == 'POST':
-        form = ReadFileForm(request.POST, request.FILES)
+        form = ReadFileForm(
+            request.POST,
+            files=request.FILES,
+        )
         if form.is_valid():
             form.save()
     else:
         form = ReadFileForm()
-    
+
     context = {
         'log': logs[id],
         'form': form
