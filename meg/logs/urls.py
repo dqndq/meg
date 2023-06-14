@@ -6,4 +6,5 @@ app_name = 'App'
 
 urlpatterns = [
     path('system/<int:id>/', views.system, name='system'),
+    path('parse_file/', views.parse_file, name='parcer'),
 ]

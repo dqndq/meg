@@ -1,52 +1,12 @@
-from django.shortcuts import render
-from django.http import HttpResponseNotFound
-from .forms import ReadFileForm
-from django.conf import settings
-import os
-from datetime import datetime
-import io
+import json
+
 import re
 
+import io
 
-logs = [
-    {
-        'funk': 'System',
-        'id': 0
-    },
-    {
-        'funk': 'Sysmon',
-        'id': 1
-    },
-    {
-        'funk': 'Security',
-        'id': 2
-    },
-]
+from collections import Counter
 
-num = set(log['id'] for log in logs)
-
-
-def system(request, id):
-    template = 'logs/system.html'
-
-    if id not in num:
-        return HttpResponseNotFound('Такой функции нет')
-
-    if request.method == 'POST':
-        form = ReadFileForm(
-            request.POST,
-            files=request.FILES,
-        )
-        if form.is_valid():
-            form.save()
-    else:
-        form = ReadFileForm()
-
-    context = {
-        'log': logs[id],
-        'form': form
-    }
-    return render(request, template, context)
+from datetime import datetime
 
 
 def process_file(file):
@@ -57,10 +17,6 @@ def process_file(file):
     UIDREG = r" UID=\".*\" GID="
     typeREG = r"type=[a-zA-Z]{0,9} msg"
     msg_auditREG = r"msg=audit\([0-9]{0,11}."
-    filename = os.path.join(settings.MEDIA_ROOT, file.name)
-    with open(filename, 'wb+') as destination:
-        for chunk in file.chunks():
-            destination.write(chunk)
 
     def audithost(filename):
         with io.open(filename, encoding='utf-8') as c:
@@ -142,35 +98,10 @@ def process_file(file):
                 el = int(el)
                 print(datetime.utcfromtimestamp(el).strftime('%d-%m-%Y %H:%M:%S'))
 
-    auditdrule(filename)
-    audithost(filename)
-    auditexec(filename)
-    auditduid(filename)
-    auditUIDS(filename)
-    audittype(filename)
-    auditmsg_audit(filename)
-
-
-def parse_file(request):
-    template = 'logs/system.html'
-    if request.method == 'POST':
-        form = ReadFileForm(
-            request.POST,
-            files=request.FILES,
-        )
-        file = request.FILES.get('file')
-        results = process_file(file)
-        context = {
-            'results': results,
-            'form': form
-        }
-        return render(request, template, context)
-    else:
-        form = ReadFileForm(
-            request.POST,
-            files=request.FILES,
-        )
-        context = {
-            'form': form
-        }
-        return render(request, template, context)
+    auditdrule(file)
+    audithost(file)
+    auditexec(file)
+    auditduid(file)
+    auditUIDS(file)
+    audittype(file)
+    auditmsg_audit(file)

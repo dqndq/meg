@@ -7,14 +7,16 @@
       Parcer
     </div>
     <div class="card-body">
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" action="{% url 'App:parcer' %}">
       {% csrf_token %}
       {% bootstrap_form form %}
       {% bootstrap_button button_type="submit" content="Прочитать" %}
     </form>
+    {% if results %}
+    <div class="mt-4">
+      <h3>Результаты парсинга</h3>
+      <p>{{ results }}</p>
     </div>
-    <div>
-      <p>Ваш файл: <a href="media/{{ form.instance.file }}">{{ form.instance.file }}</a></p>
-    </div>
+    {% endif %}
   </div>
 {% endblock %}
