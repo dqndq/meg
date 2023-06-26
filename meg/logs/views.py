@@ -10,27 +10,14 @@ import re
 
 logs = [
     {
-        'funk': 'System',
+        'funk': 'Linux events',
         'id': 0
     },
-    {
-        'funk': 'Sysmon',
-        'id': 1
-    },
-    {
-        'funk': 'Security',
-        'id': 2
-    },
 ]
-
-num = set(log['id'] for log in logs)
 
 
 def system(request, id):
     template = 'logs/system.html'
-
-    if id not in num:
-        return HttpResponseNotFound('Такой функции нет')
 
     if request.method == 'POST':
         form = ReadFileForm(

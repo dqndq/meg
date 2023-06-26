@@ -2,16 +2,8 @@ from django.shortcuts import render
 
 logs = [
     {
-        'funk': 'System',
+        'funk': 'Linux events',
         'id': 0
-    },
-    {
-        'funk': 'Sysmon',
-        'id': 1
-    },
-    {
-        'funk': 'Security',
-        'id': 2
     },
 ]
 
