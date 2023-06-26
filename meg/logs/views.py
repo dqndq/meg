@@ -48,6 +48,7 @@ def process_file(file):
     with open(filename, 'wb+') as destination:
         for chunk in file.chunks():
             destination.write(chunk)
+    results = {}
 
     def audithost(filename):
         with io.open(filename, encoding='utf-8') as c:
@@ -59,6 +60,7 @@ def process_file(file):
             for el in ar:
                 el = str(el)
                 print(el)
+            results['audithost'] = ar
 
     def auditexec(filename):
         with io.open(filename, encoding='utf-8') as b:
@@ -71,6 +73,7 @@ def process_file(file):
             for el in ar:
                 el = str(el)
                 print(el)
+            results['auditexec'] = ar
 
     def auditdrule(filename):
         with io.open(filename, encoding='utf-8') as d:
@@ -82,6 +85,7 @@ def process_file(file):
             for el in ar:
                 el = str(el)
                 print(el)
+            results['auditdrule'] = ar
 
     def auditduid(filename):
         with io.open(filename, encoding='utf-8') as d:
@@ -93,6 +97,8 @@ def process_file(file):
             for el in ar:
                 el = str(el)
                 print(el)
+            results['auditUIDS'] = ar
+            
 
     def auditUIDS(filename):
         with io.open(filename, encoding='utf-8') as b:
@@ -105,6 +111,7 @@ def process_file(file):
             for el in ar:
                 el = str(el)
                 print(el)
+            results['auditUIDS'] = ar
 
     def audittype(filename):
         with io.open(filename, encoding='utf-8') as b:
@@ -116,6 +123,7 @@ def process_file(file):
             print("audit type:", end=' ')
             for el in ar:
                 print(el)
+            results['audittype'] = ar
 
     def auditmsg_audit(filename):
         with io.open(filename, encoding='utf-8') as b:
@@ -125,9 +133,12 @@ def process_file(file):
             filter_msg2 = re.sub("\.", '', str(filter_msg))
             ar = (filter_msg2).replace("['","").replace("']","").replace("'","").split(",")
             print('log timestamp:', end=' ')
+            le = []
             for el in ar:
                 el = int(el)
-                print(datetime.utcfromtimestamp(el).strftime('%d-%m-%Y %H:%M:%S'))
+                x = (datetime.utcfromtimestamp(el).strftime('%d-%m-%Y %H:%M:%S'))
+                le.append(x)
+            results['auditmsg_audit'] = le
 
     auditdrule(filename)
     audithost(filename)
@@ -136,7 +147,7 @@ def process_file(file):
     auditUIDS(filename)
     audittype(filename)
     auditmsg_audit(filename)
-
+    return results
 
 def parse_file(request):
     template = 'logs/system.html'
