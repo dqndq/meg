@@ -15,7 +15,56 @@
     {% if results %}
     <div class="mt-4">
       <h3>Результаты парсинга</h3>
-      <p>{{ results }}</p>
+      <hr>
+      <h4>hostnames from log:</h4>
+      <ol>
+        {% for audithost in results.audithost %}
+          <li>{{ audithost }}</li>
+        {% endfor %}
+      </ol>
+      <hr>
+      <h4>log process:</h4>
+      <ol>
+        {% for auditexec in results.auditexec %}
+          <li>{{ auditexec }}</li>
+        {% endfor %}
+      </ol>
+      <hr>
+      <h4>auditd rule:</h4>
+      <ol>
+        {% for auditdrule in results.auditdrule %}
+          <li>{{ auditdrule }}</li>
+        {% endfor %}
+      </ol>
+      <hr>
+      <h4>log uids(0 for 'root'):</h4>
+      <ol>
+        {% for auditUIDS in results.auditUIDS %}
+          <li>{{ auditUIDS }}</li>
+        {% endfor %}
+      </ol>
+      <hr>
+      <h4>log username:</h4>
+      <ol>
+        {% for auditusername in results.auditusername %}
+          <li>{{ auditusername }}</li>
+        {% endfor %}
+      </ol>
+      <hr>
+      <h4>audit type:</h4>
+      <ol>
+        {% for audittype in results.audittype %}
+          <li>{{ audittype }}</li>
+        {% endfor %}
+      </ol>
+      <hr>
+      <h4>log timestamp:</h4>
+      <ol>
+        {% for auditmsg_audit in results.auditmsg_audit %}
+          <li>{{ auditmsg_audit }}</li>
+        {% endfor %}
+      <ol>
+      <hr>
     </div>
     {% endif %}
   </div>

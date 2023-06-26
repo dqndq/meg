@@ -98,7 +98,7 @@ def process_file(file):
                 el = str(el)
                 print(el)
             results['auditUIDS'] = ar
-            
+  
 
     def auditUIDS(filename):
         with io.open(filename, encoding='utf-8') as b:
@@ -111,7 +111,7 @@ def process_file(file):
             for el in ar:
                 el = str(el)
                 print(el)
-            results['auditUIDS'] = ar
+            results['auditusername'] = ar
 
     def audittype(filename):
         with io.open(filename, encoding='utf-8') as b:
